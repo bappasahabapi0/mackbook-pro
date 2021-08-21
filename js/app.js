@@ -1,13 +1,12 @@
+// total price handler function
 let price = 1299;
-
-
 function priceNow(val) {
     price += val;
     document.getElementById('total-cost').innerText = price;
     document.getElementById('discount').innerText = price;
 }
-
-// Memory handler 
+// ---------------------- Memory part -------------------------------
+// Memory handler function
 function memoryCost(isUpdate) {
     const inputMemory = document.getElementById('memory-cost');
     const inputCost = parseFloat(inputMemory.innerText);
@@ -17,11 +16,9 @@ function memoryCost(isUpdate) {
     else {
         inputMemory.innerText = 0;
     }
-
 };
-
-let memoryStatus = 8;
 //    handle the memory button 
+let memoryStatus = 8;
 document
     .getElementById('eight-gb-btn')
     .addEventListener('click', function () {
@@ -30,11 +27,8 @@ document
             memoryStatus = 8;
         }
         memoryCost(false);
-
-
     });
-
-document  // 16 GB update
+document
     .getElementById('sixteen-gb-btn')
     .addEventListener('click', function () {
         memoryCost(true);
@@ -42,16 +36,10 @@ document  // 16 GB update
             priceNow(180);
             memoryStatus = 16;
         }
-
-
     });
-
-
-
 //-------------------------------- handle the SSD button ----------------------------
 
 let ssdStatus = 256;
-
 function storageCost(isUpdate) {
     const inputStorage = document.getElementById('ssd-cost');
     const inputCost = parseFloat(inputStorage.innerText);
@@ -64,9 +52,7 @@ function storageCost(isUpdate) {
     else {
         inputStorage.innerText = 0;
     }
-
 };
-
 
 function ssdStatusPrcie(val) {
     document.getElementById('ssd-cost').innerText = val;
@@ -144,12 +130,11 @@ document.getElementById('charge').addEventListener('click', function () {
 // ------------------------------------------ Promo code secition......................
 let couponStatus = 0;
 document.getElementById('apply').addEventListener('click', function () {
-    let coupon = document.getElementById('promo-input').value;
-    if (coupon === "bappa") {
+    let coupon = document.getElementById('promo-input').value; 22
+    if (coupon === "stevekaku") {
         if (couponStatus == 0) {
             document.getElementById('discount').innerText = price * 0.80;
             couponStatus = 1;
-
         }
         else {
             alert("Coupon already applied");
@@ -160,8 +145,7 @@ document.getElementById('apply').addEventListener('click', function () {
         else alert("One coupon is already applied");
     }
     document.getElementById('promo-input').value = '';
-
-})
+});
 
 
 
