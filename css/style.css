@@ -1,6 +1,4 @@
-
-
-.apply-btn:hover{
-    background-color: green;
-    font-weight: bold;
+.hover-btn:hover{
+    background-color: rgba(0, 0, 0, 0.472);
+    color: white;
 }
