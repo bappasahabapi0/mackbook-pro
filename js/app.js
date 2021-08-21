@@ -66,7 +66,6 @@ function memoryCost(isUpdate) {
     }
 
 };
-
 let memoryStatus = 8;
 //    handle the memory button 
 document
