@@ -1,200 +1,111 @@
+
+// price updater
+let price = 1299;
 let couponStatus = 0;
-// --------------------- Highlight function----------------------------
-function priceNow(val) {
-    price += val;
+function totalPriceUpdate() {
     document.getElementById('total-cost').innerText = price;
     document.getElementById('discount').innerText = price;
-};
-
-let highlight = 'border:1px solid gray ; background: black ; color: white ';
-let thisone = document.querySelector('#ssd256');
-if (thisone) {
-    thisone.setAttribute('style', highlight);
 }
-thisone = document.querySelector('#free');
-if (thisone) {
-    thisone.setAttribute('style', highlight);
-}
-thisone = document.querySelector('#eight-gb-btn');
-if (thisone) {
-    thisone.setAttribute('style', highlight);
-};
+// highter
+let highlight = 'border:1px solid red ; background: pink';
 function choosen(val) {
     couponStatus = 0;
-    let btnSend = document.querySelector(val);
-    if (btnSend) {
-        btnSend.setAttribute('style', highlight);
-    }
-};
+    document.querySelector(val).setAttribute('style', highlight);
+}
 function notChoosen(val) {
-    let btnRmv = document.querySelector(val);
-    if (btnRmv) {
-        btnRmv.setAttribute('style', '');
-    }
+    document.querySelector(val).setAttribute('style', '');
 }
-// total price handler function
-let price = 1299;
-function priceNow(val) {
-    price += val;
-    document.getElementById('total-cost').innerText = price;
-    document.getElementById('discount').innerText = price;
-}
-// ---------------------- Memory part -------------------------------
-// Memory handler function
-function memoryCost(isUpdate) {
-    const inputMemory = document.getElementById('memory-cost');
-    const inputCost = parseFloat(inputMemory.innerText);
-    if (isUpdate == true) {
-        inputMemory.innerText = 180;
-    }
-    else {
-        inputMemory.innerText = 0;
-    }
-};
-// Memory handler 
-function memoryCost(isUpdate) {
-    const inputMemory = document.getElementById('memory-cost');
-    const inputCost = parseFloat(inputMemory.innerText);
-    if (isUpdate == true) {
-        inputMemory.innerText = 180;
-    }
-    else {
-        inputMemory.innerText = 0;
-    }
+//----------------------- Initial State ---------------------------------------
 
-};
-let memoryStatus = 8;
-//    handle the memory button 
-document
-    .getElementById('eight-gb-btn')
-    .addEventListener('click', function () {
-        choosen('#eight-gb-btn');
-        notChoosen('#sixteen-gb-btn');
-        if (memoryStatus == 16) {
-            priceNow(-180);
-            memoryStatus = 8;
-        }
-        memoryCost(false);
+choosen('#ssd256');
+choosen('#free');
+choosen('#eight');
+
+//-------------------------------- Memory Handerler ----------------------------``
+let memoryPrice = 0;
+function memoryClick(val, memoryID) {
+    document.getElementById(memoryID).addEventListener('click', function () {
+        memoryUpdater(val, '#' + memoryID);
     });
-document  // 16 GB update
-    .getElementById('sixteen-gb-btn')
-    .addEventListener('click', function () {
-        notChoosen('#eight-gb-btn');
-        choosen('#sixteen-gb-btn');
-        memoryCost(true);
-        if (memoryStatus == 8) {
-            priceNow(180);
-            memoryStatus = 16;
-        }
-    });
+}
+function memoryStatusPrcie(val) {
+    document.getElementById('memory-cost').innerText = val;
+}
+function memoryUpdater(thisPrice, memoryType) {
+    notChoosen('#eight');
+    notChoosen('#sixteen');
+    choosen(memoryType);
+    price -= memoryPrice;
+    memoryPrice = thisPrice;
+    price += memoryPrice;
+    memoryStatusPrcie(memoryPrice);
+    totalPriceUpdate();
+}
+memoryClick(0, 'eight');
+memoryClick(180, 'sixteen');
 //-------------------------------- handle the SSD button ----------------------------
-let ssdStatus = 256;
-function storageCost(isUpdate) {
-    const inputStorage = document.getElementById('ssd-cost');
-    const inputCost = parseFloat(inputStorage.innerText);
-    if (isUpdate == 'ssd1TB') {
-        inputStorage.innerText = 180;
-    }
-    else if (isUpdate == 'ssd512') {
-        inputStorage.innerText = 100;
-    }
-    else {
-        inputStorage.innerText = 0;
-    }
-};
+let ssdPrcie = 0;
+function ssdClick(val, ssdID) {
+    document.getElementById(ssdID).addEventListener('click', function () {
+        ssdUpdater(val, '#' + ssdID);
+    });
+}
 function ssdStatusPrcie(val) {
     document.getElementById('ssd-cost').innerText = val;
 }
-document
-    .getElementById('ssd256')
-    .addEventListener('click', function () {
+function ssdUpdater(thisPrice, ssdType) {
+    notChoosen('#ssd256');
+    notChoosen('#ssd1TB');
+    notChoosen('#ssd512');
+    choosen(ssdType);
+    price -= ssdPrcie;
+    ssdPrcie = thisPrice;
+    price += ssdPrcie;
+    ssdStatusPrcie(ssdPrcie);
+    totalPriceUpdate();
+}
 
-        choosen('#ssd256');
-        if (ssdStatus == 1024) {
-            priceNow(-180);
-            ssdStatus = 256;
-            notChoosen('#ssd1TB');
-        }
-        else if (ssdStatus == 512) {
-            priceNow(-100);
-            ssdStatus = 256;
-            notChoosen('#ssd512');
-        }
-        ssdStatusPrcie(0);
-        storageCost('#ssd256');
-    });
-document
-    .getElementById('ssd512')
-    .addEventListener('click', function () {
-        choosen('#ssd512')
-        if (ssdStatus == 1024) {
-            priceNow(-80);
-            ssdStatus = 512;
-            notChoosen('#ssd1TB');
-        }
-        else if (ssdStatus == 256) {
-            priceNow(100);
-            ssdStatus = 512;
-            notChoosen('#ssd256');
-        }
-        storageCost('ssd512');
-    });
-document
-    .getElementById('ssd1TB')
-    .addEventListener('click', function () {
-        choosen('#ssd1TB');
-        storageCost('ssd1TB');
-        if (ssdStatus == 512) {
-            priceNow(80);
-            ssdStatus = 1024;
-            notChoosen('#ssd512');
-        }
-        else if (ssdStatus == 256) {
-            priceNow(180);
-            ssdStatus = 1024;
-            notChoosen('#ssd256');
-        }
-        storageCost('ssd1TB');
-    });
+ssdClick(0, 'ssd256');
+ssdClick(100, 'ssd512');
+ssdClick(180, 'ssd1TB');
+
 //------------------------------------    handle the dilevery  button ---------------
 let deliveryStatus = 0;
+function deliveryStatusPrice(val) {
+    document.getElementById('delivery-cost').innerText = deliveryStatus;
+}
 document.getElementById('free').addEventListener('click', function () {
     choosen('#free');
     notChoosen('#charge');
-    if (deliveryStatus == 20) {
-        priceNow(-20);
-        deliveryStatus = 0;
-        document.getElementById('delivery-cost').innerText = deliveryStatus;
-    }
+    price -= deliveryStatus;
+    deliveryStatus = 0;
+    totalPriceUpdate();
+    deliveryStatusPrice(deliveryStatus);
 });
 document.getElementById('charge').addEventListener('click', function () {
     choosen('#charge');
     notChoosen('#free');
-    if (deliveryStatus == 0) {
-        priceNow(20);
-        deliveryStatus = 20;
-        document.getElementById('delivery-cost').innerText = deliveryStatus;
-    }
-    deliveryCost(true);
+    price -= deliveryStatus;
+    deliveryStatus = 20;
+    price += deliveryStatus;
+    totalPriceUpdate();
+    deliveryStatusPrice(deliveryStatus);
 });
+
 // ------------------------------------------ Promo code secition......................
+
 document.getElementById('apply').addEventListener('click', function () {
-    let coupon = document.getElementById('promo-input').value; 22
+    let coupon = document.getElementById('promo-input').value;
     if (coupon === "stevekaku") {
         if (couponStatus == 0) {
             document.getElementById('discount').innerText = price * 0.80;
             couponStatus = 1;
         }
-        else {
-            alert("Coupon already applied");
-        }
+        else alert("Coupon already applied");
     }
     else {
         if (couponStatus == 0) alert("Invalid Coupon");
         else alert("One coupon is already applied");
     }
     document.getElementById('promo-input').value = '';
-});
-
-
-
+})
