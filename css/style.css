@@ -2,3 +2,7 @@
     background-color: rgba(0, 0, 0, 0.472);
     color: white;
 }
+.apply-btn:hover{
+    background-color: black;
+   font-weight: 400;
+}

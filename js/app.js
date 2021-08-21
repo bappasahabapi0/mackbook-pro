@@ -1,13 +1,12 @@
-// --------------------- Highlight function ====================
-
+let couponStatus = 0;
+// --------------------- Highlight function----------------------------
 function priceNow(val) {
     price += val;
     document.getElementById('total-cost').innerText = price;
     document.getElementById('discount').innerText = price;
-}
+};
 
 let highlight = 'border:1px solid gray ; background: black ; color: white ';
-
 let thisone = document.querySelector('#ssd256');
 if (thisone) {
     thisone.setAttribute('style', highlight);
@@ -22,11 +21,12 @@ if (thisone) {
 }
 
 function choosen(val) {
+    couponStatus = 0;
     let btnSend = document.querySelector(val);
     if (btnSend) {
         btnSend.setAttribute('style', highlight);
     }
-}
+};
 
 function notChoosen(val) {
     let btnRmv = document.querySelector(val);
@@ -37,10 +37,6 @@ function notChoosen(val) {
 
 // total price handler function
 let price = 1299;
-
-
-
-// -----------------------------------------------------
 function priceNow(val) {
     price += val;
     document.getElementById('total-cost').innerText = price;
@@ -208,7 +204,7 @@ document.getElementById('charge').addEventListener('click', function () {
 });
 
 // ------------------------------------------ Promo code secition......................
-let couponStatus = 0;
+
 document.getElementById('apply').addEventListener('click', function () {
     let coupon = document.getElementById('promo-input').value; 22
     if (coupon === "stevekaku") {
