@@ -18,8 +18,7 @@ if (thisone) {
 thisone = document.querySelector('#eight-gb-btn');
 if (thisone) {
     thisone.setAttribute('style', highlight);
-}
-
+};
 function choosen(val) {
     couponStatus = 0;
     let btnSend = document.querySelector(val);
@@ -27,14 +26,12 @@ function choosen(val) {
         btnSend.setAttribute('style', highlight);
     }
 };
-
 function notChoosen(val) {
     let btnRmv = document.querySelector(val);
     if (btnRmv) {
         btnRmv.setAttribute('style', '');
     }
 }
-
 // total price handler function
 let price = 1299;
 function priceNow(val) {
@@ -78,10 +75,7 @@ document
             memoryStatus = 8;
         }
         memoryCost(false);
-
-
     });
-
 document  // 16 GB update
     .getElementById('sixteen-gb-btn')
     .addEventListener('click', function () {
@@ -92,12 +86,9 @@ document  // 16 GB update
             priceNow(180);
             memoryStatus = 16;
         }
-
-
     });
 //-------------------------------- handle the SSD button ----------------------------
 let ssdStatus = 256;
-
 function storageCost(isUpdate) {
     const inputStorage = document.getElementById('ssd-cost');
     const inputCost = parseFloat(inputStorage.innerText);
@@ -110,14 +101,10 @@ function storageCost(isUpdate) {
     else {
         inputStorage.innerText = 0;
     }
-
 };
-
-
 function ssdStatusPrcie(val) {
     document.getElementById('ssd-cost').innerText = val;
 }
-
 document
     .getElementById('ssd256')
     .addEventListener('click', function () {
@@ -127,7 +114,6 @@ document
             priceNow(-180);
             ssdStatus = 256;
             notChoosen('#ssd1TB');
-
         }
         else if (ssdStatus == 512) {
             priceNow(-100);
@@ -136,7 +122,6 @@ document
         }
         ssdStatusPrcie(0);
         storageCost('#ssd256');
-
     });
 document
     .getElementById('ssd512')
@@ -146,7 +131,6 @@ document
             priceNow(-80);
             ssdStatus = 512;
             notChoosen('#ssd1TB');
-
         }
         else if (ssdStatus == 256) {
             priceNow(100);
@@ -154,14 +138,11 @@ document
             notChoosen('#ssd256');
         }
         storageCost('ssd512');
-
     });
 document
     .getElementById('ssd1TB')
     .addEventListener('click', function () {
-
         choosen('#ssd1TB');
-
         storageCost('ssd1TB');
         if (ssdStatus == 512) {
             priceNow(80);
@@ -174,11 +155,8 @@ document
             notChoosen('#ssd256');
         }
         storageCost('ssd1TB');
-
-
     });
 //------------------------------------    handle the dilevery  button ---------------
-
 let deliveryStatus = 0;
 document.getElementById('free').addEventListener('click', function () {
     choosen('#free');
@@ -189,8 +167,6 @@ document.getElementById('free').addEventListener('click', function () {
         document.getElementById('delivery-cost').innerText = deliveryStatus;
     }
 });
-
-
 document.getElementById('charge').addEventListener('click', function () {
     choosen('#charge');
     notChoosen('#free');
@@ -201,9 +177,7 @@ document.getElementById('charge').addEventListener('click', function () {
     }
     deliveryCost(true);
 });
-
 // ------------------------------------------ Promo code secition......................
-
 document.getElementById('apply').addEventListener('click', function () {
     let coupon = document.getElementById('promo-input').value; 22
     if (coupon === "stevekaku") {
